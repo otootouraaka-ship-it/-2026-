@@ -58,11 +58,26 @@ df = pd.DataFrame(data)
 # =========================
 
 ANSWER_KEY = {
-    "Q1": "A",
-    "Q2": "C",
-    "Q3": "B",
-    "Q4": "D",
-    "Q5": "A"
+    "Q1": {
+        "answer": "A",
+        "point": 5
+    },
+    "Q2": {
+        "answer": "C",
+        "point": 20
+    },
+    "Q3": {
+        "answer": "B",
+        "point": 10
+    },
+    "Q4": {
+        "answer": "D",
+        "point": 15
+    },
+    "Q5": {
+        "answer": "A",
+        "point": 50
+    }
 }
 
 # =========================
@@ -75,10 +90,15 @@ for _, row in df.iterrows():
 
     score = 0
 
-    for q, ans in ANSWER_KEY.items():
+    for q, setting in ANSWER_KEY.items():
 
-        if str(row[q]).strip() == ans:
-            score += 1
+        correct_answer = setting["answer"]
+
+        point = setting["point"]
+
+        if str(row[q]).strip() == correct_answer:
+            
+            score += point
 
     scores.append(score)
 
@@ -92,7 +112,10 @@ mean_score = df["score"].mean()
 
 std_score = df["score"].std()
 
-max_score = len(ANSWER_KEY)
+max_score = sum(
+    setting["point"]
+    for setting in ANSWER_KEY.values()
+)
 
 accuracy = (
     df["score"].sum()
@@ -170,7 +193,9 @@ st.subheader("問題別正答率")
 
 question_accuracy = {}
 
-for q, ans in ANSWER_KEY.items():
+for q, setting in ANSWER_KEY.items():
+
+    ans = setting["answer"]
 
     correct = (
         df[q]
@@ -276,7 +301,8 @@ st.write(
 
 st.dataframe(
     page_df,
-    use_container_width=True
+    use_container_width=True,
+    hide_index=True
 )
 # =========================
 # 生データ

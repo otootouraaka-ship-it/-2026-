@@ -11,12 +11,6 @@ from google.oauth2.service_account import Credentials
 from streamlit_autorefresh import st_autorefresh
 
 # =========================
-# 自動更新
-# =========================
-
-st_autorefresh(interval=5000, key="refresh")
-
-# =========================
 # Streamlit設定
 # =========================
 
@@ -25,6 +19,13 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+# =========================
+# 自動更新
+# =========================
+
+st_autorefresh(interval=5000, key="refresh")
+
 
 def set_bg_image(image_file):
 
@@ -61,6 +62,8 @@ def set_bg_image(image_file):
 set_bg_image("image.png")
 
 st.title("げんしけんにじさんじ共通テスト2026 in 清陵祭")
+
+
 
 # =========================
 # Google Sheets接続

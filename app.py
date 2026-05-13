@@ -41,7 +41,7 @@ creds = Credentials.from_service_account_file(
 client = gspread.authorize(creds)
 
 # スプレッドシート名
-SPREADSHEET_NAME = "フォームの回答"
+SPREADSHEET_NAME = "にじさんじ共通テスト2026"
 
 sheet = client.open(SPREADSHEET_NAME).sheet1
 

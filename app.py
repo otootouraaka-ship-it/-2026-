@@ -20,4 +20,4 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-st.titel("test")
+st.title("test")

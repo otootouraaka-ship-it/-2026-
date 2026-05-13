@@ -16,8 +16,7 @@ from streamlit_autorefresh import st_autorefresh
 
 st.set_page_config(
     page_title="げんしけんにじさんじ共通テスト2026 in 清陵祭",
-    layout="wide",
-    initial_sidebar_state="expanded"
+    layout="wide"
 )
 
 st.title("test")

@@ -23,7 +23,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("げんしけんにじさんじ共通テスト")
+st.title("リアルタイム試験集計システム")
 
 # =========================
 # Google Sheets接続
@@ -82,36 +82,36 @@ for _, row in df.iterrows():
 
     scores.append(score)
 
-df["得点"] = scores
+df["score"] = scores
 
 # =========================
 # 統計量
 # =========================
 
-mean_score = df["得点"].mean()
+mean_score = df["score"].mean()
 
-std_score = df["得点"].std()
+std_score = df["score"].std()
 
 max_score = len(ANSWER_KEY)
 
 accuracy = (
-    df["得点"].sum()
+    df["score"].sum()
     / (len(df) * max_score)
 ) * 100
 
 # 偏差値
 if std_score != 0:
-    df["偏差値"] = (
+    df["hensachi"] = (
         50 + 10 *
-        (df["得点"] - mean_score)
+        (df["score"] - mean_score)
         / std_score
     )
 else:
-    df["偏差値"] = 50
+    df["hensachi"] = 50
 
 # ランキング
-df["順位"] = (
-    df["得点"]
+df["rank"] = (
+    df["score"]
     .rank(
         ascending=False,
         method="min"
@@ -153,12 +153,12 @@ st.subheader("得点分布")
 fig, ax = plt.subplots()
 
 ax.hist(
-    df["得点"],
+    df["score"],
     bins=range(max_score + 2),
 )
 
-ax.set_xlabel("得点")
-ax.set_ylabel("人数")
+ax.set_xlabel("Score")
+ax.set_ylabel("Count")
 
 st.pyplot(fig)
 
@@ -184,12 +184,12 @@ for q, ans in ANSWER_KEY.items():
     question_accuracy[q] = rate
 
 qa_df = pd.DataFrame({
-    "問題番号": question_accuracy.keys(),
-    "正答率": question_accuracy.values()
+    "Question": question_accuracy.keys(),
+    "Accuracy": question_accuracy.values()
 })
 
 st.bar_chart(
-    qa_df.set_index("問題")
+    qa_df.set_index("Question")
 )
 
 # =========================
@@ -201,18 +201,18 @@ st.subheader("ランキング")
 # 表示用DataFrame
 ranking_df = df[[
     "ハンドルネーム",
-    "得点",
-    "偏差値",
-    "順位"
+    "score",
+    "hensachi",
+    "rank"
 ]].copy()
 
 ranking_df = ranking_df.sort_values(
-    by=["得点", "偏差値"],
+    by=["score", "hensachi"],
     ascending=False
 )
 
 # rankを整数化
-ranking_df["順位"] = ranking_df["順位"].astype(int)
+ranking_df["rank"] = ranking_df["rank"].astype(int)
 
 # インデックス整理
 ranking_df = ranking_df.reset_index(drop=True)

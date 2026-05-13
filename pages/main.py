@@ -20,12 +20,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# =========================
-# 自動更新
-# =========================
-
-st_autorefresh(interval=5000, key="refresh")
-
 
 def set_bg_image(image_file):
 

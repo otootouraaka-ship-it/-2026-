@@ -7,11 +7,7 @@ from google.oauth2.service_account import Credentials
 
 from streamlit_autorefresh import st_autorefresh
 
-# =========================
-# 自動更新
-# =========================
 
-st_autorefresh(interval=5000, key="refresh")
 
 # =========================
 # ページ設定
@@ -23,6 +19,12 @@ st.set_page_config(
 )
 
 st.title("問題別 選択肢分析")
+
+# =========================
+# 自動更新
+# =========================
+
+st_autorefresh(interval=5000, key="refresh")
 
 # =========================
 # Google Sheets接続

@@ -200,7 +200,7 @@ st.subheader("ランキング")
 
 # 表示用DataFrame
 ranking_df = df[[
-    "handle_name",
+    "ハンドルネーム",
     "score",
     "hensachi",
     "rank"

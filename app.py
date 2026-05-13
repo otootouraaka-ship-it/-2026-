@@ -211,34 +211,14 @@ st.subheader("得点分布")
 
 fig, ax = plt.subplots()
 
-fig.patch.set_alpha(0)
-
-ax.set_facecolor((0,0,0,0))
-
-bars = ax.bar(
-    qa_df["Question"],
-    qa_df["Accuracy"],
+ax.hist(
+    df["score"],
+    bins=range(max_score + 2),
     alpha=0.3
 )
 
-ax.set_ylim(0, 100)
-
-ax.set_yticks(range(0, 101, 10))
-
-ax.set_ylabel("Accuracy (%)")
-
-ax.set_title("Question Accuracy")
-
-for bar in bars:
-
-    height = bar.get_height()
-
-    ax.text(
-        bar.get_x() + bar.get_width()/2,
-        height + 1,
-        f"{height:.1f}%",
-        ha='center'
-    )
+ax.set_xlabel("Score")
+ax.set_ylabel("Count")
 
 st.pyplot(fig)
 
@@ -275,10 +255,6 @@ qa_df = pd.DataFrame({
 # =========================
 
 fig, ax = plt.subplots()
-
-fig.patch.set_alpha(0)
-
-ax.set_facecolor((0,0,0,0))
 
 bars = ax.bar(
     qa_df["Question"],

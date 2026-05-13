@@ -253,8 +253,6 @@ qa_df = pd.DataFrame({
 # 問題別正答率グラフ
 # =========================
 
-st.subheader("問題別正答率")
-
 fig, ax = plt.subplots()
 
 ax.bar(

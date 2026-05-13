@@ -340,10 +340,3 @@ st.dataframe(
     use_container_width=True,
     hide_index=True
 )
-# =========================
-# 生データ
-# =========================
-
-with st.expander("回答データ"):
-
-    st.dataframe(df)

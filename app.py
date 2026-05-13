@@ -22,7 +22,8 @@ st_autorefresh(interval=5000, key="refresh")
 
 st.set_page_config(
     page_title="げんしけんにじさんじ共通テスト2026 in 清陵祭",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
 def set_bg_image(image_file):

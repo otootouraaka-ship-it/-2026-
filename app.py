@@ -249,9 +249,29 @@ qa_df = pd.DataFrame({
     "Accuracy": question_accuracy.values()
 })
 
-st.bar_chart(
-    qa_df.set_index("Question")
+# =========================
+# 問題別正答率グラフ
+# =========================
+
+st.subheader("問題別正答率")
+
+fig, ax = plt.subplots()
+
+ax.bar(
+    qa_df["Question"],
+    qa_df["Accuracy"]
 )
+
+# 縦軸固定
+ax.set_ylim(0, 100)
+
+# ラベル
+ax.set_ylabel("Accuracy (%)")
+
+# タイトル
+ax.set_title("Question Accuracy")
+
+st.pyplot(fig)
 
 # =========================
 # ランキング表示

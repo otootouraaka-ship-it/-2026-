@@ -41,9 +41,9 @@ creds = Credentials.from_service_account_file(
 client = gspread.authorize(creds)
 
 # スプレッドシート名
-SPREADSHEET_NAME = "にじさんじ共通テスト2026"
+SHEET_URL = "https://docs.google.com/spreadsheets/d/1TOUV7U2uJMHM2DO08_Dqhd_babEl-XESRXKIfIqpiYE/edit?resourcekey=&gid=1281103730#gid=1281103730"
 
-sheet = client.open(SPREADSHEET_NAME).sheet1
+sheet = client.open_by_url(SHEET_URL).sheet1
 
 data = sheet.get_all_records()
 

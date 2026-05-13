@@ -23,7 +23,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("リアルタイム試験集計システム")
+st.title("げんしけんにじさんじ共通テスト2026 in 清陵祭")
 
 # =========================
 # Google Sheets接続

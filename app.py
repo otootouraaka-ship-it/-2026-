@@ -198,18 +198,86 @@ st.bar_chart(
 
 st.subheader("ランキング")
 
+# 表示用DataFrame
 ranking_df = df[[
+    "handle_name",
     "score",
     "hensachi",
     "rank"
-]]
+]].copy()
 
 ranking_df = ranking_df.sort_values(
-    by="rank"
+    by=["score", "hensachi"],
+    ascending=False
 )
 
-st.dataframe(ranking_df)
+# rankを整数化
+ranking_df["rank"] = ranking_df["rank"].astype(int)
 
+# インデックス整理
+ranking_df = ranking_df.reset_index(drop=True)
+
+# =========================
+# ページング設定
+# =========================
+
+ITEMS_PER_PAGE = 10
+
+total_items = len(ranking_df)
+
+total_pages = (
+    total_items - 1
+) // ITEMS_PER_PAGE + 1
+
+# session_state初期化
+if "page" not in st.session_state:
+    st.session_state.page = 0
+
+# =========================
+# ページ切替ボタン
+# =========================
+
+col1, col2, col3 = st.columns([1,2,1])
+
+with col1:
+    if st.button("◀ 前へ"):
+
+        if st.session_state.page > 0:
+            st.session_state.page -= 1
+
+with col3:
+    if st.button("次へ ▶"):
+
+        if st.session_state.page < total_pages - 1:
+            st.session_state.page += 1
+
+# =========================
+# 現在ページ計算
+# =========================
+
+start_idx = (
+    st.session_state.page
+    * ITEMS_PER_PAGE
+)
+
+end_idx = start_idx + ITEMS_PER_PAGE
+
+page_df = ranking_df.iloc[
+    start_idx:end_idx
+]
+
+# =========================
+# 表示
+# =========================
+
+st.write(
+    f"ページ {st.session_state.page + 1} / {total_pages}"
+)
+
+st.dataframe(
+    page_df,
+    use_container_width=True
+)
 # =========================
 # 生データ
 # =========================

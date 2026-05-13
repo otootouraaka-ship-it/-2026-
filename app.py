@@ -214,6 +214,7 @@ fig, ax = plt.subplots()
 ax.hist(
     df["score"],
     bins=range(max_score + 2),
+    alpha=0.3
 )
 
 ax.set_xlabel("Score")
@@ -255,9 +256,10 @@ qa_df = pd.DataFrame({
 
 fig, ax = plt.subplots()
 
-ax.bar(
+bars = ax.bar(
     qa_df["Question"],
-    qa_df["Accuracy"]
+    qa_df["Accuracy"],
+    alpha=0.3
 )
 
 # 縦軸固定
